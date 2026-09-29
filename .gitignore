@@ -1,0 +1,24 @@
+# 依存関係
+node_modules
+
+# ビルド成果物
+dist
+dist-ssr
+
+# 環境変数（Supabase の接続情報など）
+.env
+.env.local
+.env.*.local
+
+# ログ
+logs
+*.log
+npm-debug.log*
+
+# エディタ・OS
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+Thumbs.db
+*.local
