@@ -37,6 +37,13 @@ export function AuthProvider({ children }) {
       supabase.auth.signInWithPassword({ email, password }),
     // ログアウトする
     signOut: () => supabase.auth.signOut(),
+    // パスワード再設定メールを送信する（メール内のリンクから再設定画面へ戻ってくる）
+    sendPasswordResetEmail: (email) =>
+      supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/reset-password`,
+      }),
+    // ログイン中のユーザーのパスワードを変更する
+    updatePassword: (password) => supabase.auth.updateUser({ password }),
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

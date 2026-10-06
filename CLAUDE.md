@@ -10,6 +10,7 @@ Supabase 認証付きの不動産管理 Web アプリ。
 - ログイン後は物件一覧画面へ遷移
 - 未ログイン時はログイン画面へリダイレクト
 - ログアウト機能
+- ログイン失敗時のパスワードリセットメール送信と再設定画面（`/reset-password`）
 - 物件（物件名・家賃・エリア名・間取り）の一覧・登録・編集・削除（Supabase の `properties` テーブル）
 - RLS により自分が登録した物件のみ操作可能
 
@@ -33,6 +34,7 @@ src/
   components/PropertyForm.jsx   物件の登録・編集で共用するフォーム
   pages/Login.jsx         ログイン画面
   pages/Signup.jsx        会員登録画面
+  pages/ResetPassword.jsx パスワード再設定画面（リセットメールのリンク先）
   pages/Properties.jsx    物件一覧画面（カード形式・登録/編集/削除）
 ```
 

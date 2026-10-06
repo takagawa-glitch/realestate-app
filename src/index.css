@@ -236,3 +236,10 @@ button {
 .empty {
   color: #555;
 }
+
+/* パスワードリセットメール送信ボタン（ログインボタンより控えめに表示） */
+.auth-form .secondary-button {
+  border: 1px solid #2563eb;
+  background: #fff;
+  color: #2563eb;
+}

@@ -4,6 +4,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import GuestRoute from './components/GuestRoute'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
+import ResetPassword from './pages/ResetPassword'
 import Properties from './pages/Properties'
 
 // ルーティングの定義
@@ -15,6 +16,9 @@ export default function App() {
           {/* 未ログイン向けの画面 */}
           <Route path="/login" element={<GuestRoute><Login /></GuestRoute>} />
           <Route path="/signup" element={<GuestRoute><Signup /></GuestRoute>} />
+
+          {/* パスワード再設定（リセットメールのリンクから一時ログイン状態で開くためガードなし） */}
+          <Route path="/reset-password" element={<ResetPassword />} />
 
           {/* ログインが必要な画面 */}
           <Route
