@@ -1,0 +1,238 @@
+/* 全体の基本スタイル */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, 'Hiragino Sans', 'Yu Gothic UI', sans-serif;
+  background: #f5f6f8;
+  color: #222;
+}
+
+button {
+  cursor: pointer;
+  font: inherit;
+}
+
+.loading {
+  text-align: center;
+  margin-top: 80px;
+}
+
+/* ログイン・会員登録画面 */
+.auth-container {
+  max-width: 360px;
+  margin: 80px auto;
+  padding: 32px 24px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.auth-container h1 {
+  margin: 0 0 24px;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.auth-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.9rem;
+}
+
+.auth-form input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.auth-form button {
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.auth-form button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.auth-link {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.error {
+  margin: 0;
+  color: #dc2626;
+  font-size: 0.9rem;
+}
+
+.success {
+  margin: 0;
+  color: #16a34a;
+  font-size: 0.9rem;
+}
+
+/* 物件一覧画面 */
+.page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-email {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.logout-button {
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.card-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  margin: 0 0 12px;
+  font-size: 1.1rem;
+}
+
+.card-rent {
+  margin: 0 0 6px;
+}
+
+.card-rent strong {
+  font-size: 1.2rem;
+  color: #2563eb;
+}
+
+.card-area {
+  margin: 0;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+/* 物件の登録・編集・削除 */
+.card-list button,
+.property-form button,
+.add-button {
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.primary-button,
+.property-form .primary-button {
+  border-color: #2563eb;
+  background: #2563eb;
+  color: #fff;
+}
+
+.primary-button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.danger-button,
+.card-list .danger-button {
+  border-color: #dc2626;
+  color: #dc2626;
+}
+
+.add-button {
+  margin-bottom: 16px;
+}
+
+.form-card {
+  margin-bottom: 24px;
+}
+
+.property-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.property-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.9rem;
+}
+
+.property-form input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.form-actions,
+.card-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.card-actions {
+  margin-top: 16px;
+}
+
+.card .card-area + .card-area {
+  margin-top: 4px;
+}
+
+.empty {
+  color: #555;
+}

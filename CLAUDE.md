@@ -7,9 +7,11 @@
 Supabase 認証付きの不動産管理 Web アプリ。
 
 - メールアドレス＋パスワードによる会員登録・ログイン
-- ログイン後は物件一覧画面（ダミーデータ）へ遷移
+- ログイン後は物件一覧画面へ遷移
 - 未ログイン時はログイン画面へリダイレクト
 - ログアウト機能
+- 物件（物件名・家賃・エリア名・間取り）の一覧・登録・編集・削除（Supabase の `properties` テーブル）
+- RLS により自分が登録した物件のみ操作可能
 
 ## 技術スタック
 
@@ -20,15 +22,25 @@ Supabase 認証付きの不動産管理 Web アプリ。
 ## ディレクトリ構成
 
 ```
+supabase/
+  schema.sql              properties テーブル・RLS ポリシーの定義（SQL Editor で実行）
 src/
   lib/supabaseClient.js   Supabase クライアントの生成（.env から接続情報を読み込む）
+  lib/propertiesApi.js    properties テーブルへの CRUD 操作
   contexts/AuthContext.jsx 認証状態（セッション）を全体に提供するコンテキスト
   components/ProtectedRoute.jsx 未ログイン時にログイン画面へリダイレクトするガード
+  components/GuestRoute.jsx     ログイン済み時に物件一覧へリダイレクトするガード
+  components/PropertyForm.jsx   物件の登録・編集で共用するフォーム
   pages/Login.jsx         ログイン画面
   pages/Signup.jsx        会員登録画面
-  pages/Properties.jsx    物件一覧画面（カード形式）
-  data/properties.js      物件のダミーデータ
+  pages/Properties.jsx    物件一覧画面（カード形式・登録/編集/削除）
 ```
+
+## データベース
+
+- テーブル定義は `supabase/schema.sql` で管理する。変更時はこのファイルを更新し、Supabase の SQL Editor で実行する
+- `properties.user_id` は既定値 `auth.uid()` で登録者が自動設定される
+- アクセス制御は RLS ポリシーで行う（クライアント側でユーザー絞り込みをしなくても自分の物件のみ返る）
 
 ## よく使うコマンド
 
@@ -48,6 +60,11 @@ Supabase の接続情報は `.env` で管理する（`.gitignore` 済み。絶�
 VITE_SUPABASE_URL=...
 VITE_SUPABASE_PUBLISHABLE_KEY=...
 ```
+
+## デプロイ（Vercel）
+
+- `vercel.json` で全 URL を `index.html` に書き換え、React Router の画面を直接開いても 404 にならないようにしている
+- 環境変数（`VITE_SUPABASE_URL` / `VITE_SUPABASE_PUBLISHABLE_KEY`）は Vercel ダッシュボードで設定する（`vercel.json` には含めない）
 
 ## コーディング規約
 
