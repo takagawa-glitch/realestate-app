@@ -66,6 +66,11 @@ VITE_SUPABASE_PUBLISHABLE_KEY=...
 - `vercel.json` で全 URL を `index.html` に書き換え、React Router の画面を直接開いても 404 にならないようにしている
 - 環境変数（`VITE_SUPABASE_URL` / `VITE_SUPABASE_PUBLISHABLE_KEY`）は Vercel ダッシュボードで設定する（`vercel.json` には含めない）
 
+## デプロイ情報
+
+- 本番URL：https://realestate-app-xi-ten.vercel.app
+- Supabaseプロジェクト名：realestate-app
+
 ## コーディング規約
 
 - コード中のコメントは日本語で記載する
