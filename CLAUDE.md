@@ -74,6 +74,10 @@ VITE_SUPABASE_PUBLISHABLE_KEY=...
 
 - 本番URL：https://realestate-app-xi-ten.vercel.app
 - Supabaseプロジェクト名：realestate-app
+- Supabase の Authentication → URL Configuration の設定
+  - Site URL：`https://realestate-app-xi-ten.vercel.app`
+  - Redirect URLs：`https://realestate-app-xi-ten.vercel.app/**`、`http://localhost:5173/**`
+  - ここに登録していない URL へはメール（パスワードリセット・会員登録確認）のリンクから戻れず、Site URL に飛ばされる
 
 ## コーディング規約
 
