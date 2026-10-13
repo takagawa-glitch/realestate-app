@@ -77,3 +77,67 @@ create policy "自分の物件のみ削除"
   on public.properties for delete
   to authenticated
   using ((select auth.uid()) = user_id);
+
+-- =========================================================
+-- 物件画像（Supabase Storage）
+-- 既存環境では以下を追加で実行する
+-- =========================================================
+
+-- 物件画像のパス（Storage の property-images バケット内のパス。画像なしは null）
+alter table public.properties add column if not exists image_path text;
+
+-- 画像保存用のバケット（非公開。表示時は署名付きURLを発行する）
+-- 1ファイル 5MB まで、画像形式のみ許可
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values (
+  'property-images',
+  'property-images',
+  false,
+  5242880,
+  array['image/jpeg', 'image/png', 'image/webp', 'image/gif']
+)
+on conflict (id) do nothing;
+
+-- ---------------------------------------------------------
+-- Storage の RLS
+-- 画像は「ユーザーID/ファイル名」のパスで保存し、自分のフォルダのみ操作できる
+-- ---------------------------------------------------------
+drop policy if exists "自分の物件画像のみ表示" on storage.objects;
+create policy "自分の物件画像のみ表示"
+  on storage.objects for select
+  to authenticated
+  using (
+    bucket_id = 'property-images'
+    and (storage.foldername(name))[1] = (select auth.uid())::text
+  );
+
+drop policy if exists "自分のフォルダに物件画像を登録" on storage.objects;
+create policy "自分のフォルダに物件画像を登録"
+  on storage.objects for insert
+  to authenticated
+  with check (
+    bucket_id = 'property-images'
+    and (storage.foldername(name))[1] = (select auth.uid())::text
+  );
+
+drop policy if exists "自分の物件画像のみ更新" on storage.objects;
+create policy "自分の物件画像のみ更新"
+  on storage.objects for update
+  to authenticated
+  using (
+    bucket_id = 'property-images'
+    and (storage.foldername(name))[1] = (select auth.uid())::text
+  )
+  with check (
+    bucket_id = 'property-images'
+    and (storage.foldername(name))[1] = (select auth.uid())::text
+  );
+
+drop policy if exists "自分の物件画像のみ削除" on storage.objects;
+create policy "自分の物件画像のみ削除"
+  on storage.objects for delete
+  to authenticated
+  using (
+    bucket_id = 'property-images'
+    and (storage.foldername(name))[1] = (select auth.uid())::text
+  );
